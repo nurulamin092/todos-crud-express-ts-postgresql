@@ -5,6 +5,7 @@ import initDb, { pool } from "./config/db";
 import logger from "./middleware/logger";
 import { userRouter } from "./modules/user/user.routes";
 import { todosRouter } from "./modules/todo/todo.routes";
+import { authRoutes } from "./modules/auth/auth.routes";
 
 const app = express();
 const port = config.port;
@@ -25,9 +26,13 @@ app.get("/", logger, (req: Request, res: Response) => {
 
 app.use("/users", userRouter);
 
-//* todos create
+//* todos crud
 
 app.use("/todos", todosRouter);
+
+//* auth route
+
+app.use("/auth", authRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

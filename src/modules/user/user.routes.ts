@@ -1,11 +1,12 @@
 import express from "express";
 import { userController } from "./user.controller";
+import logger from "../../middleware/logger";
 
 const router = express.Router();
 
 router.post("/", userController.createUser);
 
-router.get("/", userController.getUser);
+router.get("/", logger, userController.getUser);
 
 router.get("/:id", userController.getSingleUser);
 router.put("/:id", userController.updatedUser);
